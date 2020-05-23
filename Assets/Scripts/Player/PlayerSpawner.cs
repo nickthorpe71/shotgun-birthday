@@ -12,19 +12,18 @@ public class PlayerSpawner : MonoBehaviour
 
     //bool respawning;
 
-    void Update()
+    public void SpawnPlayer()
     {
-        if(Input.GetKeyDown(KeyCode.L))
-        {
-           StartCoroutine(Spawn());
-        }
+        StartCoroutine(SpawnRoutine());
     }
 
-    IEnumerator Spawn()
+    IEnumerator SpawnRoutine()
     {
         GameObject mainCam = GameManager.instance.mainCam;
 
         //respawning = true;
+
+        GameManager.instance.startButton.SetActive(false);
 
         Vector3 pos = new Vector3(Random.Range(-75f, 75f), 1, Random.Range(-75f, 75f));
         Quaternion rot = Quaternion.Euler(-90, 0, 0);
@@ -43,4 +42,6 @@ public class PlayerSpawner : MonoBehaviour
 
         //respawning = false;
     }
+
+
 }

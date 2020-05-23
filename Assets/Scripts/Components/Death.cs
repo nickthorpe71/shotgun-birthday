@@ -28,7 +28,6 @@ public class Death : MonoBehaviour
             GameManager.instance.highestScore = 100;
             orbStore.crown.SetActive(false);
         }
-
         GameManager.instance.RemoveObject(gameObject);
 
         Destroy(gameObject, 30);

@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target;
-    Vector3 defaultPos = new Vector3(0, 153, -18);
+    Vector3 defaultPos = new Vector3(0, 180, 0);
     public bool following;
 
     void Update()
@@ -13,7 +13,7 @@ public class CameraFollow : MonoBehaviour
         if (following)
         {
             if (target != null)
-                transform.position = new Vector3(target.position.x, 35, target.position.z - 1);
+                transform.position = new Vector3(target.position.x, 35, target.position.z);
             else
                 transform.position = defaultPos;
         }

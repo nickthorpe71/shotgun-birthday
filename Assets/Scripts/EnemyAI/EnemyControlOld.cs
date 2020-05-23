@@ -2,25 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControl : MonoBehaviour
+public class EnemyControlOld: MonoBehaviour
 {
+    //Pursue
+    float speed = 3.0f;
+    public GameObject target;
+    bool pursuing;
 
     //Shooting
     float bornAimMod;
     float aimModX = 0;
+    Vector3 shotTarget;
     bool shooting;
 
-    //Targeting
+    //Targets
     float bornChangeTargetMod;
     float changeTargetMod;
-    public GameObject lookTarget;
-    public GameObject moveTarget;
-    float changeShotTarget = 0.0f;
-    float changeWalkTarget = 0.0f;
-    int detectionRadius = 20;
 
     //Wander
     bool wandering;
+
+    //Searching
+    float changeTarget = 0.0f;
+    int detectionRadius = 20;
 
     //Components
     Battery battery;
@@ -33,99 +37,51 @@ public class EnemyControl : MonoBehaviour
     private void Start()
     {
         manager = GameManager.instance;
-        battery = GetComponent<Battery>();
-        shootScript = GetComponent<Shoot>();
-        engine = GetComponent<Engine>();
 
         GameManager.instance.AddObject(gameObject);
 
-        InvokeRepeating("LookForTargets", 0, 1f);
-
-        InvokeRepeating("ChooseWhereToWalk", 0, 0.1f);
-
+        InvokeRepeating("MakeDecisions", 0, 0.25f);
+        battery = GetComponent<Battery>();
+        shootScript = GetComponent<Shoot>();
         bornAimMod = Random.Range(0, 7);
         bornChangeTargetMod = Random.Range(2, 20);
-        
+        engine = GetComponent<Engine>();
 
         engine.moveSpeed = 5;
     }
 
     private void FixedUpdate()
     {
-        if(lookTarget != null)
-            Look();
+        if (wandering && engine.enabled == false)
+            engine.enabled = true;
+        else if (wandering && engine.enabled == true)
+            engine.enabled = false;
+
+        if (pursuing && target != null)
+            Pursue();
+
     }
 
-    void LookForTargets()
+    void MakeDecisions()
     {
-        if (ListOfShotTargets().Count > 0)
+        if (Time.time > 5 && target == null)
         {
+            SearchForTargets();
             aimModX = Random.Range(-bornAimMod, bornAimMod);
             changeTargetMod = Random.Range(0, bornChangeTargetMod);
 
-            if (changeShotTarget >= changeTargetMod || lookTarget == null || !ListOfShotTargets().Contains(lookTarget))
+            if (battery.charges == 0)
             {
-                lookTarget = ListOfShotTargets()[Random.Range(0, ListOfShotTargets().Count)];
-                changeShotTarget = 0.0f;
-            }
-            else
-            {
-                changeShotTarget += 1f;
-            }
-
-            if (!shooting && !battery.recharging && (lookTarget.CompareTag("Player") || lookTarget.CompareTag("Enemy")))
-            {
-                StartCoroutine(ShootRoutine1());
+                pursuing = false;
+                wandering = true;
             }
         }
-        else
-        {
-            aimModX = 0;
-            lookTarget = moveTarget;
-        }
-    }
-
-    void ChooseWhereToWalk()
-    {
-        if (ListOfWalkTargets().Count > 0)
-        {
-            if(moveTarget != null)
-            {
-                SendMoveTarget();
-            }
-            else if(moveTarget == null && !ListOfWalkTargets().Contains(moveTarget))
-            {
-                moveTarget = ListOfWalkTargets()[Random.Range(0, ListOfWalkTargets().Count)];
-            }
-        }
-        else
+        else if (!pursuing)
         {
             Wander();
         }
-    }
 
-    void SendMoveTarget()
-    {
-        Vector3 direction = moveTarget.transform.position - transform.position;
-        float x = direction.x;
-        float z = direction.z;
 
-        if ((x > -0.5f && x < 0) || (x < 0.5f && x > 0))
-            x = 0;
-        else if (x >= 0.5f)
-            x = 1;
-        else if(x <= -0.5f)
-            x = -1;
-
-        if ((z > -0.5f && x < 0) || (z < 0.5f && x > 0))
-            z = 0;
-        else if (z >= 0.5f)
-            z = 1;
-        else if (z <= -0.5f)
-            z = -1;
-
-        engine.movement.x = x;
-        engine.movement.z = z;
     }
 
     void Wander()
@@ -164,14 +120,42 @@ public class EnemyControl : MonoBehaviour
             engine.movement.z = 1;
     }
 
-    void Look()
+    void Pursue()
     {
-        Vector3 shotTargetPos = new Vector3(lookTarget.transform.position.x + aimModX, lookTarget.transform.position.y, lookTarget.transform.position.z);
+        float step = (speed + engine.moveSpeed) * Time.deltaTime;
 
-        transform.LookAt(shotTargetPos);
+        if (Vector3.Distance(transform.position, target.transform.position) > 15)
+            step = speed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, target.transform.position) < 10)
+            step = speed * Time.deltaTime;
+
+        if (Vector3.Distance(transform.position, target.transform.position) < 3)
+            step = (speed + engine.moveSpeed) * Time.deltaTime;
+
+        Vector3 targPos = new Vector3(target.transform.position.x, 1, target.transform.position.z);
+        transform.position = Vector3.MoveTowards(transform.position, targPos, step);
+
+        if (changeTarget >= changeTargetMod || target == null)
+        {
+            SearchForTargets();
+            changeTarget = 0.0f;
+        }
+        else
+        {
+            changeTarget += 0.1f;
+            if (!shooting && !battery.recharging && target.tag != "Collect")
+            {
+                StartCoroutine(ShootRoutine1());
+            }
+        }
+
+        shotTarget = new Vector3(target.transform.position.x + aimModX, target.transform.position.y, target.transform.position.z);
+
+        transform.LookAt(shotTarget);
     }
 
-    List<GameObject> ListOfShotTargets()
+    List<GameObject> ListOfTargets()
     {
         List<GameObject> all = new List<GameObject>();
 
@@ -181,8 +165,10 @@ public class EnemyControl : MonoBehaviour
             longest = manager.players.Count;
         if (manager.enemies.Count > longest)
             longest = manager.enemies.Count;
+        if (manager.orbs.Count > longest)
+            longest = manager.orbs.Count;
 
-        for(int i = 0; i < longest; i++)
+        for (int i = 0; i < longest; i++)
         {
             if (manager.players.Count - 1 >= i)
                 if (Vector3.Distance(manager.players[i].transform.position, transform.position) < detectionRadius)
@@ -190,25 +176,107 @@ public class EnemyControl : MonoBehaviour
             if (manager.enemies.Count - 1 >= i && manager.enemies[i] != gameObject)
                 if (Vector3.Distance(manager.enemies[i].transform.position, transform.position) < detectionRadius)
                     all.Add(manager.enemies[i]);
+            if (manager.orbs.Count - 1 >= i)
+                if (Vector3.Distance(manager.orbs[i].transform.position, transform.position) < detectionRadius)
+                    all.Add(manager.orbs[i]);
         }
 
         return all;
     }
 
-    List<GameObject> ListOfWalkTargets()
+    List<GameObject> ListOfTargetsOld()
     {
-        List<GameObject> all = new List<GameObject>();
+        List<List<GameObject>> choice = new List<List<GameObject>>();
+        List<GameObject> safe = new List<GameObject>();
 
-        //add orbs
-        for (int i = 0; i < manager.orbs.Count; i++)
+        int choiceInt = 0;
+        int testInt = 0;
+        int safety = 0;
+
+        choice.Add(manager.enemies);
+        choice.Add(manager.players);
+        choice.Add(manager.orbs);
+
+
+        while (testInt == 0)
         {
-            if (Vector3.Distance(manager.orbs[i].transform.position, transform.position) < detectionRadius)
-                all.Add(manager.orbs[i]);
+            choiceInt = Random.Range(0, choice.Count);
+            testInt = choice[choiceInt].Count;
+
+            safety++;
+
+            if (safety >= 100)
+            {
+                print("Safety triggered");
+                return safe;
+            }
+
         }
 
-        //later add in the ability to walk toward shot targets as well
+        print("TestInt = " + testInt + " ChoiceInt = " + choiceInt);
 
-        return all;
+        if (choice[choiceInt].Contains(gameObject))
+            choice[choiceInt].Remove(gameObject);
+
+        /*
+        else
+        {
+            if (others.Length > collectables.Length)
+            {
+                for (int i = 0; i < others.Length; i++)
+                {
+                    if (others.Length > 0 && others[i] != gameObject && others[i] != null)
+                        all.Add(others[i]);
+                    if (collectables.Length > 0 && collectables[i] != null)
+                        all.Add(collectables[i]);
+                    if (players.Length > 0 && players[i] != null)
+                        all.Add(players[i]);
+                }
+            }
+            else if (collectables.Length > others.Length)
+            {
+                for (int i = 0; i < collectables.Length; i++)
+                {
+                    if (others.Length >= i && others[i] != gameObject && others[i] != null)
+                        all.Add(others[i]);
+                    if (collectables.Length >= i && collectables[i] != null)
+                        all.Add(collectables[i]);
+                    if (players.Length >= i) && players[i] != null)
+                        all.Add(players[i]);
+                }
+            }
+        }*/
+
+        return choice[choiceInt];
+    }
+
+    void SearchForTargets()
+    {
+        List<GameObject> targets = ListOfTargets();
+
+        if (targets.Count <= 0)
+        {
+            pursuing = false;
+            wandering = true;
+            print("empty targets");
+            return;
+        }
+
+        for (int i = 0; i < targets.Count; i++) //If the new version of ListOfTargets is kept this for loop can be removed
+        {
+            if (Vector3.Distance(targets[i].transform.position, transform.position) < detectionRadius)
+            {
+                target = targets[i];
+                pursuing = true;
+                wandering = false;
+                print("target selected!");
+                return;
+            }
+        }
+
+        pursuing = false;
+        wandering = true;
+        return;
     }
 
     IEnumerator ShootRoutine1()
@@ -222,7 +290,7 @@ public class EnemyControl : MonoBehaviour
         Shoot();
         yield return new WaitForSeconds(Random.Range(0f, 3f));
 
-        if(battery.enabled)
+        if (battery.enabled)
             battery.SlowRecharge();
 
         shooting = false;
@@ -235,7 +303,7 @@ public class EnemyControl : MonoBehaviour
         {
             shootScript.Shooting();
         }
-        
+
     }
 
 }

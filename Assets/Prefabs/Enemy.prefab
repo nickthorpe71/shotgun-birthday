@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 300405274732444055}
   - component: {fileID: 9158698348767644445}
   - component: {fileID: 4638047320426349950}
-  - component: {fileID: 3349177634114716205}
+  - component: {fileID: 5198873069623289486}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -266,8 +266,6 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7058f0ba5f4ea4320b4f514f86bc7d5d, type: 2}
   lightObj: {fileID: 274455880007475963}
   recharging: 0
-  reloadStartSound: {fileID: 7906507152506552034, guid: a66367bd352534328863cc9b5c283d6f,
-    type: 3}
   reloadCompleteSound: {fileID: 7906507152506552034, guid: 375c1833d787549eebf51e021ba966f3,
     type: 3}
 --- !u!114 &6928511091947046016
@@ -333,7 +331,7 @@ MonoBehaviour:
   orbCount: 10
   lightSource: {fileID: 274455880007475963}
   crown: {fileID: 2732146016976160712}
---- !u!114 &3349177634114716205
+--- !u!114 &5198873069623289486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -342,7 +340,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 274455879873918194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67353a718456b41b5a31b36b973ec797, type: 3}
+  m_Script: {fileID: 11500000, guid: 709eafee0bdfd4f818500f91ada63df2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   lookTarget: {fileID: 0}
