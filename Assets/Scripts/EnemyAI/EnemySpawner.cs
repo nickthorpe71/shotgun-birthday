@@ -8,7 +8,7 @@ public class EnemySpawner : MonoBehaviour
 
     public GameObject enemyPrefab;
     public GameObject spawnPrefab;
-    public GameObject spawnSound;
+    //public GameObject spawnSound;
 
     GameManager manager;
 
@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
             Quaternion rot = Quaternion.Euler(-90, 0, 0);
 
             Instantiate(spawnPrefab, pos, rot);
-            Instantiate(spawnSound, pos, rot);
+            //Instantiate(spawnSound, pos, rot);
 
             yield return new WaitForSeconds(2);
 

@@ -7,6 +7,7 @@ public class Shoot : MonoBehaviour
     public Transform firePoint;
     public GameObject laserPrefab;
     public GameObject gunSound;
+    public GameObject gunObj;
     [HideInInspector] public float laserScale = 0.3f;
     public float laserForce = 50;
 
@@ -26,7 +27,5 @@ public class Shoot : MonoBehaviour
         rb.AddForce(firePoint.forward * laserForce, ForceMode.Impulse);
         laser.transform.localScale = new Vector3(laserScale, laserScale, laserScale);
         battery.ReduceCharge();
-
-        //GetComponent<OrbStorage>().increaseDecreaseOrbs(-1);
     }
 }

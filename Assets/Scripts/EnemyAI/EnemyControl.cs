@@ -16,7 +16,7 @@ public class EnemyControl : MonoBehaviour
     public GameObject lookTarget;
     public GameObject moveTarget;
     float changeShotTarget = 0.0f;
-    float changeWalkTarget = 0.0f;
+    //float changeWalkTarget = 0.0f;
     int detectionRadius = 20;
 
     //Wander
@@ -43,7 +43,7 @@ public class EnemyControl : MonoBehaviour
 
         InvokeRepeating("ChooseWhereToWalk", 0, 0.1f);
 
-        bornAimMod = Random.Range(0, 2);
+        bornAimMod = Random.Range(0, 4);
         bornChangeTargetMod = Random.Range(2, 20);
         
 

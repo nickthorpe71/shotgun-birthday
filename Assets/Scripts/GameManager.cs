@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public UIManager uIManager;
 
     public int numActive;
-    public int maxNumActive = 25;
+    public int maxNumActive = 19;
 
     public List<GameObject> players = new List<GameObject>();
     public List<GameObject> enemies = new List<GameObject>();

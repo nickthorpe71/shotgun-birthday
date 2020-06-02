@@ -22,7 +22,13 @@ public class Death : MonoBehaviour
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
         DropOrbs();
 
-        if(GameManager.instance.winningPlayer == gameObject)
+        GetComponent<Battery>().charges = 0;
+        GetComponent<Battery>().ChangeColor(5);
+        GetComponent<Battery>().enabled = false;
+        GetComponent<Engine>().enabled = false;
+        GetComponent<Battery>().StopAllCoroutines();
+
+        if (GameManager.instance.winningPlayer == gameObject)
         {
             GameManager.instance.winningPlayer = null;
             GameManager.instance.highestScore = 100;

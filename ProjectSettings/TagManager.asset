@@ -9,6 +9,7 @@ TagManager:
   - Collect
   - Ground
   - Barrier
+  - Bullet
   layers:
   - Default
   - TransparentFX

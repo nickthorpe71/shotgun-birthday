@@ -264,6 +264,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: f9f7a0fd0dea7484589a69407d73cb6d, type: 2}
   - {fileID: 2100000, guid: 0adca325460be4545a40f07c9aed2ec9, type: 2}
   - {fileID: 2100000, guid: 7058f0ba5f4ea4320b4f514f86bc7d5d, type: 2}
+  - {fileID: 2100000, guid: 9221f0e447ff74c5e9ade22b91097286, type: 2}
   lightObj: {fileID: 274455880007475963}
   recharging: 0
   reloadCompleteSound: {fileID: 7906507152506552034, guid: 375c1833d787549eebf51e021ba966f3,
@@ -299,6 +300,7 @@ MonoBehaviour:
     type: 3}
   gunSound: {fileID: 7906507152506552034, guid: 805e22dd319194bcaac6e7064221a2ed,
     type: 3}
+  gunObj: {fileID: 0}
   laserScale: 0.3
   laserForce: 50
 --- !u!114 &9158698348767644445

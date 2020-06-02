@@ -32,17 +32,25 @@ public class Warp : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && !dashing && battery.charges > 0 && !battery.recharging)
         {
             StartCoroutine(DashRoutine());
+            if(GetComponent<PlayerControl>())
+            {
+                if (GetComponent<PlayerControl>().swordClass)
+                {
+                    GetComponent<Sword>().Slash();
+                }
+            }
         }
     }
 
     IEnumerator DashRoutine()
     {
+        float oldMoveSpeed = engine.moveSpeed;
         battery.ReduceCharge();
         WarpEffect(transform.position);
         dashing = true;
-        engine.moveSpeed *= 9;
+        engine.moveSpeed = 100;
         yield return new WaitForSeconds(0.07f);
-        engine.moveSpeed /= 9;
+        engine.moveSpeed = oldMoveSpeed;
         dashing = false;
 
         //GetComponent<OrbStorage>().increaseDecreaseOrbs(-1);
