@@ -11,8 +11,7 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject clickSound;
 
-    public bool gunClass;
-    public bool swordClass;
+    public string weaponClass;
     
     private void Start()
     {
@@ -25,17 +24,17 @@ public class PlayerControl : MonoBehaviour
         swordScript = GetComponent<Sword>();
         engine = GetComponent<Engine>();
 
-        
-
-        if (gunClass)
+        if (weaponClass == "Gun")
         {
             shootScript.gunObj.SetActive(true);
             engine.moveSpeed = 5;
+            swordScript.enabled = false;
         }
-        else if (swordClass)
+        else if (weaponClass == "Sword")
         {
             swordScript.swordObj.SetActive(true);
-            engine.moveSpeed = 7.77f;
+            engine.moveSpeed = 6.65f;
+            shootScript.enabled = false;
         }
             
     }
@@ -47,9 +46,9 @@ public class PlayerControl : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            if (gunClass)
+            if (weaponClass == "Gun")
                 Gun();
-            else if (swordClass)
+            else if (weaponClass == "Sword")
                 Sword();
         }
     }

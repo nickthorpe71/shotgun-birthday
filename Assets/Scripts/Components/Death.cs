@@ -9,8 +9,6 @@ public class Death : MonoBehaviour
 
     public GameObject orbPrefab;
     
-
-
     private void Start()
     {
         orbStore = GetComponent<OrbStorage>();
@@ -41,7 +39,6 @@ public class Death : MonoBehaviour
 
     void DropOrbs()
     {
-
         int orbs = orbStore.orbCount;
         float radius = battery.lightObj.range /2 + 1;
         while (orbs > 0)
@@ -60,6 +57,5 @@ public class Death : MonoBehaviour
 
             orbs -= value;
         }
-
     }
 }

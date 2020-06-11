@@ -34,7 +34,7 @@ public class Warp : MonoBehaviour
             StartCoroutine(DashRoutine());
             if(GetComponent<PlayerControl>())
             {
-                if (GetComponent<PlayerControl>().swordClass)
+                if (GetComponent<PlayerControl>().weaponClass == "Sword")
                 {
                     GetComponent<Sword>().Slash();
                 }

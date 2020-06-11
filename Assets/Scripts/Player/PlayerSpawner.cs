@@ -12,12 +12,17 @@ public class PlayerSpawner : MonoBehaviour
 
     //bool respawning;
 
-    public void SpawnPlayer()
+    public void SpawnPlayerGun()
     {
-        StartCoroutine(SpawnRoutine());
+        StartCoroutine(SpawnRoutine("Gun"));
     }
 
-    IEnumerator SpawnRoutine()
+    public void SpawnPlayerSword()
+    {
+        StartCoroutine(SpawnRoutine("Sword"));
+    }
+
+    IEnumerator SpawnRoutine(string weaponClass)
     {
         GameObject mainCam = GameManager.instance.mainCam;
 
@@ -38,6 +43,7 @@ public class PlayerSpawner : MonoBehaviour
 
         mainCam.GetComponent<CameraFollow>().following = true;
         GameObject newPlayer = Instantiate(playerPrefab, pos, Quaternion.identity);
+        newPlayer.GetComponent<PlayerControl>().weaponClass = weaponClass;
         mainCam.GetComponent<CameraFollow>().target = newPlayer.transform;
 
         //respawning = false;
