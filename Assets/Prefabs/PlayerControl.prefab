@@ -453,13 +453,6 @@ MonoBehaviour:
   - {fileID: 6424787205016805810}
   - {fileID: 6424787205417987170}
   - {fileID: 6424787205376476888}
-  lightColors:
-  - {fileID: 2100000, guid: 8394eb9268ba94d34bfd9087b46bdb06, type: 2}
-  - {fileID: 2100000, guid: 5ecabbb12089f41a48a81924ea7117f1, type: 2}
-  - {fileID: 2100000, guid: f9f7a0fd0dea7484589a69407d73cb6d, type: 2}
-  - {fileID: 2100000, guid: 0adca325460be4545a40f07c9aed2ec9, type: 2}
-  - {fileID: 2100000, guid: 7058f0ba5f4ea4320b4f514f86bc7d5d, type: 2}
-  - {fileID: 2100000, guid: 9221f0e447ff74c5e9ade22b91097286, type: 2}
   lightObj: {fileID: 6424787203860028798}
   batteryColors:
   - {r: 0.98039216, g: 0.21176471, b: 0.11764706, a: 0.5803922}
