@@ -7,8 +7,8 @@ public class Battery : MonoBehaviour
     public int charges = 3;
     int maxCharges;
     public MeshRenderer[] lightObjects;
-    public Material[] lightColors;
     public Light lightObj;
+    public Color[] batteryColors;
 
     float rechargeTime = 2.5f;
     [HideInInspector] public bool recharging;
@@ -65,8 +65,8 @@ public class Battery : MonoBehaviour
     {
         for (int i = 0; i < lightObjects.Length; i++)
         {
-            lightObjects[i].material = lightColors[color];
-            lightObj.color = lightColors[color].color;
+            lightObjects[i].material.color = batteryColors[color];
+            lightObj.color = batteryColors[color];
         }
 
         if (color == 0)

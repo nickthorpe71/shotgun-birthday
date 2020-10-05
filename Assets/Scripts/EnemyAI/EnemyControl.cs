@@ -214,15 +214,15 @@ public class EnemyControl : MonoBehaviour
     IEnumerator ShootRoutine1()
     {
         shooting = true;
-        yield return new WaitForSeconds(Random.Range(0.1f, 3f));
+        yield return new WaitForSeconds(Random.Range(0.1f, Random.Range(1, 3)));
         Shoot();
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
+        yield return new WaitForSeconds(Random.Range(0f, Random.Range(1,3)));
         Shoot();
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
+        yield return new WaitForSeconds(Random.Range(0f, Random.Range(1, 3)));
         Shoot();
-        yield return new WaitForSeconds(Random.Range(0f, 3f));
+        yield return new WaitForSeconds(Random.Range(0f, Random.Range(1, 3)));
 
-        if(battery.enabled)
+        if (battery.enabled)
             battery.SlowRecharge();
 
         shooting = false;

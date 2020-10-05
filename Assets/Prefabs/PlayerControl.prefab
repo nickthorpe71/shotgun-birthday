@@ -368,8 +368,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clickSound: {fileID: 7906507152506552034, guid: d9581d5b73db1497ebc12040f0be9864,
     type: 3}
-  gunClass: 0
-  swordClass: 1
+  weaponClass: 
 --- !u!114 &3703499339259928795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,6 +461,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 7058f0ba5f4ea4320b4f514f86bc7d5d, type: 2}
   - {fileID: 2100000, guid: 9221f0e447ff74c5e9ade22b91097286, type: 2}
   lightObj: {fileID: 6424787203860028798}
+  batteryColors:
+  - {r: 0.98039216, g: 0.21176471, b: 0.11764706, a: 0.5803922}
+  - {r: 1, g: 0.54509807, b: 0, a: 1}
+  - {r: 0.8862745, g: 0.90588236, b: 0, a: 1}
+  - {r: 0.14509805, g: 0.85882354, b: 0, a: 1}
+  - {r: 0.7058824, g: 0, b: 1, a: 1}
+  - {r: 0.22745098, g: 0.19607843, b: 0.19215687, a: 0.39607844}
   recharging: 0
   reloadCompleteSound: {fileID: 7906507152506552034, guid: 375c1833d787549eebf51e021ba966f3,
     type: 3}
