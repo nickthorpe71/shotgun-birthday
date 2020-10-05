@@ -4,28 +4,28 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <title>Unity WebGL Player | Shotgun Birthday</title>
-  <link rel="shortcut icon" href="TemplateData/favicon.ico">
-  <link rel="stylesheet" href="TemplateData/style.css">
-  <script src="TemplateData/UnityProgress.js"></script>
-  <script src="Build/UnityLoader.js"></script>
+  <title>Shotgun Birthday</title>
+  <link rel="shortcut icon" href="src/TemplateData/favicon.ico">
+  <link rel="stylesheet" href="src/TemplateData/style.css">
+  <script src="src/TemplateData/UnityProgress.js"></script>
+  <script src="src/Build/UnityLoader.js"></script>
   <script>
-    var unityInstance = UnityLoader.instantiate("unityContainer", "Build/sgbd-web-build.json", { onProgress: UnityProgress });
+    var unityInstance = UnityLoader.instantiate("unityContainer", "src/Build/sgbd-web-build.json", { onProgress: UnityProgress });
   </script>
 </head>
 
 <body>
   <div class="webgl-content">
     <main class="header">
-      <h1>Robo Shotgun Birthday - Prototype</h1>
+      <h1>Robo Shotgun Birthday - Proof of Concept</h1>
       <p>Blast the other robots before they blast you.
-        <br>To contact the developer email nick@lostonestudios.com or check out @lostonestudios on <a
+        To contact the developer email nick@lostonestudios.com or check out @lostonestudios on <a
           href="https://www.instagram.com/lostonestudios/">Instagram</a> and <a
           href="https://twitter.com/lostonestudios">Twitter</a>.
-        <br> There is no musis only SFX so you can play your own music in the background.
+        There is no music only SFX.
       </p>
     </main>
-    <div id="unityContainer" style="width: 600px; height: 600px"></div>
+    <div id="unityContainer" style="width: 700px; height: 700px"></div>
     <div class="footer">
       <h2>Controls</h2>
       <ul>
