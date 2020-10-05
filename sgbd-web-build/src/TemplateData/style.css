@@ -43,42 +43,53 @@
 }
 
 /* General */
+.webgl-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
 body {
     background-color: rgb(24, 24, 24);
-  }
-
-.webgl-content .header {
-  margin-top: 5px; 
-  height: 38px; 
-  line-height: 38px; 
-  font-family: Helvetica, Verdana, Arial, sans-serif; 
-  font-size: 18px; 
-  color: #eeeeee; 
-  text-align: center}
-
-.controls {
-    margin-top: 5px; 
-    height: 38px; 
-    line-height: 38px; 
-    font-family: Helvetica, Verdana, Arial, sans-serif; 
-    font-size: 18px; 
-    color: #eeeeee;
 }
 
-/* Layout */
+h1 {
+  font-family: Helvetica, Verdana, Arial, sans-serif; 
+  font-size: 2rem; 
+  color: #eeeeee; 
+  text-align: center;
+  margin: 2rem;
+}
+
+/* Info */
+
+.info{
+  display: flex;
+  flex-direction: row;
+  width: 70vh;
+  max-width: 800px;
+}
+
+.controls {
+  flex: 1;
+  font-family: Helvetica, Verdana, Arial, sans-serif; 
+  font-size: 18px; 
+  color: #eeeeee;
+}
+
+.description {
+  flex: 1;
+  font-family: Helvetica, Verdana, Arial, sans-serif; 
+  font-size: 18px; 
+  color: #eeeeee;
+}
 
 /* Game */
 
-.webgl-content * {
-  border: 0; 
-  margin: 0; 
-  padding: 0
-}
-.webgl-content {
-  position: absolute;
-  top: 50%; 
-  left: 50%; 
-  -webkit-transform: translate(-50%, -50%); 
-  transform: translate(-50%, -50%);
+#unityContainer{
+  width: 70vh;
+  height: 70vh;
+  max-width: 800px;
+  max-height: 800px;
 }
