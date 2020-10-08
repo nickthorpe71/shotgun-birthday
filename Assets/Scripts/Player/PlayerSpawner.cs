@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using System.IO;
 
 public class PlayerSpawner : MonoBehaviour
 {
@@ -12,14 +14,14 @@ public class PlayerSpawner : MonoBehaviour
 
     //bool respawning;
 
-    public void SpawnPlayerGun()
+    private void Start()
     {
-        StartCoroutine(SpawnRoutine("Gun"));
-    }
-
-    public void SpawnPlayerSword()
-    {
-        StartCoroutine(SpawnRoutine("Sword"));
+        if (PhotonNetwork.IsConnected)
+        {
+            //need to send over class selection from lobby and feed it in instead of "Gun"
+            StartCoroutine(SpawnRoutine("Gun"));
+            //StartCoroutine(SpawnRoutine("Sword"));
+        }
     }
 
     IEnumerator SpawnRoutine(string weaponClass)
