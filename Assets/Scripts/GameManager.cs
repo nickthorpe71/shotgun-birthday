@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject mainCam;
 
-    public GameObject startButton;
+    //public GameObject startButton;
 
     private void Awake()
     {

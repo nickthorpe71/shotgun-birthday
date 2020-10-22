@@ -30,7 +30,7 @@ public class PlayerSpawner : MonoBehaviour
 
         //respawning = true;
 
-        GameManager.instance.startButton.SetActive(false);
+        //GameManager.instance.startButton.SetActive(false);
 
         Vector3 pos = new Vector3(Random.Range(-75f, 75f), 1, Random.Range(-75f, 75f));
         Quaternion rot = Quaternion.Euler(-90, 0, 0);

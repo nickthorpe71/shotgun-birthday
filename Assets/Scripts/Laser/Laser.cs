@@ -42,8 +42,8 @@ public class Laser : MonoBehaviour
                     collider.gameObject.GetComponent<PlayerControl>().enabled = false;
                     collider.gameObject.GetComponent<Rotation>().enabled = false;
 
-                    if(collider.gameObject.name == "LocalPlayer")
-                        GameManager.instance.startButton.SetActive(true);
+                    //if(collider.gameObject.name == "LocalPlayer")
+                    //    GameManager.instance.startButton.SetActive(true);
                 }
 
                 collider.gameObject.tag = "Dead";
@@ -93,8 +93,8 @@ public class Laser : MonoBehaviour
                     collider.gameObject.GetComponent<PlayerControl>().enabled = false;
                     collider.gameObject.GetComponent<Rotation>().enabled = false;
 
-                    if (collider.gameObject.name == "LocalPlayer")
-                        GameManager.instance.startButton.SetActive(true);
+                    //if (collider.gameObject.name == "LocalPlayer")
+                    //    GameManager.instance.startButton.SetActive(true);
                 }
 
                 collider.gameObject.tag = "Dead";
