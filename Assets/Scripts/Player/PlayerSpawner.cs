@@ -44,7 +44,8 @@ public class PlayerSpawner : MonoBehaviour
         yield return new WaitForSeconds(2);
 
         mainCam.GetComponent<CameraFollow>().following = true;
-        GameObject newPlayer = Instantiate(playerPrefab, pos, Quaternion.identity);
+        //GameObject newPlayer = Instantiate(playerPrefab, pos, Quaternion.identity);
+        GameObject newPlayer = PhotonNetwork.Instantiate("PlayerControl", pos, Quaternion.identity);
         newPlayer.GetComponent<PlayerControl>().weaponClass = weaponClass;
         mainCam.GetComponent<CameraFollow>().target = newPlayer.transform;
 

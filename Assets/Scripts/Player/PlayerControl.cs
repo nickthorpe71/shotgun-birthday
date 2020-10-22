@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControl : MonoBehaviourPun
 {
     Battery battery;
     Shoot shootScript;
@@ -15,9 +16,12 @@ public class PlayerControl : MonoBehaviour
     
     private void Start()
     {
-        gameObject.name = "LocalPlayer";
-
         GameManager.instance.AddObject(gameObject);
+
+        if (!photonView.IsMine)
+            Destroy(GetComponent<PlayerControl>());
+
+        gameObject.name = "LocalPlayer";
 
         battery = GetComponent<Battery>();
         shootScript = GetComponent<Shoot>();
