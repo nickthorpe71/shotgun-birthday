@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Battery : MonoBehaviour
+public class Battery : MonoBehaviourPun
 {
     public int charges = 3;
     int maxCharges;
@@ -38,7 +39,7 @@ public class Battery : MonoBehaviour
         //Instantiate(reloadStartSound, transform.position, transform.rotation);
         recharging = true;
         yield return new WaitForSeconds(rechargeTime - 0.25f);
-        Instantiate(reloadCompleteSound, transform.position, transform.rotation);
+        PhotonNetwork.Instantiate("ReloadComplete", transform.position, transform.rotation);
         yield return new WaitForSeconds(0.25f);
         recharging = false;
         Recharge();

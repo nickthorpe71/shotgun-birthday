@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Death : MonoBehaviour
+public class Death : MonoBehaviourPun
 {
     OrbStorage orbStore;
     Battery battery;
@@ -35,6 +36,10 @@ public class Death : MonoBehaviour
         GameManager.instance.RemoveObject(gameObject);
 
         Destroy(gameObject, 30);
+
+        //send player back to lobby
+        PhotonNetwork.LeaveRoom();
+        PhotonNetwork.LoadLevel(0);
     }
 
     void DropOrbs()

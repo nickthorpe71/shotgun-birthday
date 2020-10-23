@@ -21,6 +21,9 @@ public class PlayerControl : MonoBehaviourPun
         if (!photonView.IsMine)
         {
             Destroy(GetComponent<PlayerControl>());
+            Destroy(GetComponent<Shoot>());
+            Destroy(GetComponent<Sword>());
+            Destroy(GetComponent<Engine>());
         }
             
 

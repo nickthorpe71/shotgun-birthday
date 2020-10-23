@@ -403,10 +403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firePoint: {fileID: 6424787204523795774}
-  laserPrefab: {fileID: 6498414394667426641, guid: bc0381fc7b9d0437e86883ce5c5d5a8b,
-    type: 3}
-  gunSound: {fileID: 7906507152506552034, guid: 805e22dd319194bcaac6e7064221a2ed,
-    type: 3}
   gunObj: {fileID: 6424787204788411849}
   laserScale: 0.3
   laserForce: 50
@@ -434,10 +430,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e9cec0b8c74c4b6d9b9f5dfaf33d1cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  warpEffect: {fileID: 8828280143228593014, guid: a2eb4a00af74a4335b9640d98bae1205,
-    type: 3}
-  warpSound: {fileID: 7906507152506552034, guid: ff73046ef13724d9383415d742b4dc7c,
-    type: 3}
 --- !u!114 &6424787203940604294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -548,7 +540,7 @@ MonoBehaviour:
   m_PositionModel:
     SynchronizeEnabled: 1
     TeleportEnabled: 1
-    TeleportIfDistanceGreaterThan: 10
+    TeleportIfDistanceGreaterThan: 5
     InterpolateOption: 2
     InterpolateMoveTowardsSpeed: 1
     InterpolateLerpSpeed: 1
@@ -1602,13 +1594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b19bbc28bf7410f89e3c57f57c1b87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffect: {fileID: 8828280143228593014, guid: ad50fe979231d400c8f4c7d9e74e7a74,
-    type: 3}
   holder: {fileID: 6424787203940604413}
-  impactSound1: {fileID: 7906507152506552034, guid: fa87e1ffe979b4092bb8062cb241cd6b,
-    type: 3}
-  impactSound2: {fileID: 7906507152506552034, guid: 81c639aed27324664b07ca4c46ba27be,
-    type: 3}
 --- !u!65 &8884933377251213245
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -1,27 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class LaserBlade : MonoBehaviour
+public class LaserBlade : MonoBehaviourPun
 {
-    public GameObject hitEffect;
     public GameObject holder;
-    public GameObject impactSound1;
-    public GameObject impactSound2;
-
 
     void OnTriggerEnter(Collider collider)
     {
         if (collider.gameObject != holder && collider.gameObject.CompareTag("Player") || collider.gameObject.CompareTag("Enemy"))
         {
 
-            GameObject effect = Instantiate(hitEffect, transform.position, transform.rotation);
+            GameObject effect = PhotonNetwork.Instantiate("LaserCollision", transform.position, transform.rotation);
 
             Destroy(effect, 2);
 
             collider.gameObject.GetComponent<Death>().Die();
 
-            Instantiate(impactSound1, transform.position, transform.rotation);
+            PhotonNetwork.Instantiate("ImpactSound1", transform.position, transform.rotation);
 
             if (collider.gameObject.CompareTag("Enemy"))
             {
@@ -46,7 +43,7 @@ public class LaserBlade : MonoBehaviour
         }
         else if(!collider.gameObject.CompareTag("Bullet"))
         {
-            //Instantiate(impactSound2, transform.position, transform.rotation);
+            //PhotonNetwork.Instantiate(impactSound2, transform.position, transform.rotation);
         }
     }
 }

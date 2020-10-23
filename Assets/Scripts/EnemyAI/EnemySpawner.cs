@@ -1,14 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner : MonoBehaviourPun
 {
     public static EnemySpawner instance;
 
     public GameObject enemyPrefab;
     public GameObject spawnPrefab;
-    //public GameObject spawnSound;
 
     GameManager manager;
 
@@ -16,6 +16,9 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
+        if (!PhotonNetwork.IsMasterClient)
+            Destroy(GetComponent<EnemySpawner>());
+
         InvokeRepeating("ReSpawn", 0, 0.25f);
 
         manager = GameManager.instance;
@@ -40,12 +43,12 @@ public class EnemySpawner : MonoBehaviour
             Vector3 pos = new Vector3(Random.Range(-manager.arenaX, manager.arenaX), 1, Random.Range(-manager.arenaZ, manager.arenaZ));
             Quaternion rot = Quaternion.Euler(-90, 0, 0);
 
-            Instantiate(spawnPrefab, pos, rot);
-            //Instantiate(spawnSound, pos, rot);
+            PhotonNetwork.Instantiate("SpawnEffect", pos, rot);
+            //PhotonNetwork.Instantiate(spawnSound, pos, rot);
 
             yield return new WaitForSeconds(2);
 
-            Instantiate(enemyPrefab, pos, Quaternion.identity);
+            PhotonNetwork.Instantiate("Enemy", pos, Quaternion.identity);
         }
 
         respawning = false;

@@ -1,15 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Laser : MonoBehaviour
+public class Laser : MonoBehaviourPun
 {
-    public GameObject hitEffect;
     public float laserDuration = 0.6f;
     [HideInInspector] public GameObject shooter;
-
-    public GameObject impactSound1;
-    public GameObject impactSound2;
 
     private void Start()
     {
@@ -20,7 +17,7 @@ public class Laser : MonoBehaviour
 	{
         if(collider.gameObject != shooter && collider.gameObject.tag != "Collect" && collider.gameObject.tag != "Ground")
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, transform.rotation);
+            GameObject effect = PhotonNetwork.Instantiate("LaserCollision", transform.position, transform.rotation);
 
             Destroy(effect, 2);
             Destroy(gameObject);
@@ -29,7 +26,7 @@ public class Laser : MonoBehaviour
             {
                 collider.gameObject.GetComponent<Death>().Die();
 
-                Instantiate(impactSound1, transform.position, transform.rotation);
+                PhotonNetwork.Instantiate("ImpactSound1", transform.position, transform.rotation);
 
                 //shooter.GetComponent<Battery>().Recharge();
 
@@ -56,7 +53,7 @@ public class Laser : MonoBehaviour
             }
             else
             {
-                Instantiate(impactSound2, transform.position, transform.rotation);
+                PhotonNetwork.Instantiate("ImpactSound2", transform.position, transform.rotation);
             }
 
         }
@@ -66,7 +63,7 @@ public class Laser : MonoBehaviour
     {
         if (collider.gameObject != shooter && collider.gameObject.tag != "Collect" && collider.gameObject.tag != "Ground")
         {
-            GameObject effect = Instantiate(hitEffect, transform.position, transform.rotation);
+            GameObject effect = PhotonNetwork.Instantiate("LaserCollision", transform.position, transform.rotation);
 
             Destroy(effect, 2);
             Destroy(gameObject);
@@ -80,7 +77,7 @@ public class Laser : MonoBehaviour
                 collider.gameObject.GetComponent<Engine>().enabled = false;
                 collider.gameObject.GetComponent<Battery>().StopAllCoroutines();
 
-                Instantiate(impactSound1, transform.position, transform.rotation);
+                PhotonNetwork.Instantiate("ImpactSound1", transform.position, transform.rotation);
 
                 //shooter.GetComponent<Battery>().Recharge();
 
@@ -107,7 +104,7 @@ public class Laser : MonoBehaviour
             }
             else
             {
-                Instantiate(impactSound2, transform.position, transform.rotation);
+                PhotonNetwork.Instantiate("ImpactSound2", transform.position, transform.rotation);
             }
 
         }

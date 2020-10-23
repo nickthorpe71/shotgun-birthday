@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Photon.Pun;
 
-public class Warp : MonoBehaviour
+public class Warp : MonoBehaviourPun
 {
     Vector3 newPosition;
-
-    public GameObject warpEffect;
-    public GameObject warpSound;
 
     PlayerControl moveScript;
     Battery battery;
@@ -61,8 +59,8 @@ public class Warp : MonoBehaviour
         Vector3 newPos = new Vector3(pos.x, 0, pos.z);
         Quaternion rotation =  Quaternion.Euler (-90, 0, 0);
 
-        GameObject effect = Instantiate(warpEffect, newPos, rotation);
-        Instantiate(warpSound, newPos, rotation);
+        GameObject effect = PhotonNetwork.Instantiate("WarpEffect", newPos, rotation);
+        PhotonNetwork.Instantiate("WarpSound", newPos, rotation);
         Destroy(effect, 2);
     }
 }

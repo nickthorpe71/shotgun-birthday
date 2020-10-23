@@ -8,7 +8,6 @@ public class PlayerSpawner : MonoBehaviour
 {
     public static EnemySpawner instance;
 
-    public GameObject playerPrefab;
     public GameObject spawnPrefab;
     public GameObject spawnSound;
 
