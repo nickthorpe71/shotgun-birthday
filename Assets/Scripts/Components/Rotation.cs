@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class Rotation : MonoBehaviour
+public class Rotation : MonoBehaviourPun
 {
+    private void Start()
+    {
+        if (!photonView.IsMine)
+            Destroy(GetComponent<Rotation>());
+    }
+
     private void FixedUpdate()
     {
         //Get the Screen positions of the object

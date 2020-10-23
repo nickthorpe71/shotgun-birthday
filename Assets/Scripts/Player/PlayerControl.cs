@@ -19,7 +19,10 @@ public class PlayerControl : MonoBehaviourPun
         GameManager.instance.AddObject(gameObject);
 
         if (!photonView.IsMine)
+        {
             Destroy(GetComponent<PlayerControl>());
+        }
+            
 
         gameObject.name = "LocalPlayer";
 
